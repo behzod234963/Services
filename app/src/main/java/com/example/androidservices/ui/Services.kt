@@ -42,9 +42,13 @@ class Services : AppCompatActivity() {
     //    Request permission of User for posting notifications
     private fun requestPermission() {
 
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 
-            ActivityCompat.requestPermissions(this,arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 0)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
+                0
+            )
 
         }
 
@@ -61,38 +65,51 @@ class Services : AppCompatActivity() {
 
             btnForeground.setOnClickListener { onBtnFgListener() }
 
+            btnBound.setOnClickListener { onBtnBoundListener() }
+
         }
 
     }
 
+
+//    Listener for button Bound
+    private fun onBtnBoundListener() {
+
+
+
+    }
+
+
+    //    Listener for foreground service
     @RequiresApi(Build.VERSION_CODES.O)
     private fun onBtnFgListener() {
 
         startStopFg++
 
-        when(startStopFg){
+        when (startStopFg) {
 
-            1->{
+            1 -> {
 
-                Intent(applicationContext,ForegroundServices::class.java).also {
+                Intent(applicationContext, ForegroundServices::class.java).also {
 
-                    it.action=ForegroundServices.Actions.START.toString()
+                    it.action = ForegroundServices.Actions.START.toString()
                     startForegroundService(it)
 
                 }
                 Toast.makeText(this, "1 is working", Toast.LENGTH_SHORT).show()
 
             }
-            2->{
 
-                Intent(applicationContext,ForegroundServices::class.java).also {
+            2 -> {
 
-                    it.action=ForegroundServices.Actions.STOP.toString()
+                Intent(applicationContext, ForegroundServices::class.java).also {
+
+                    it.action = ForegroundServices.Actions.STOP.toString()
                     startService(it)
 
                 }
 
-                startStopFg=0
+                startStopFg = 0
 
             }
 
@@ -116,7 +133,7 @@ class Services : AppCompatActivity() {
             2 -> {
 
                 stopService(Intent(this@Services, BackgroundServices::class.java))
-                startStopBG= 0
+                startStopBG = 0
 
             }
 
