@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.example.androidservices.databinding.ActivityServicesBinding
@@ -16,6 +17,7 @@ class Services : AppCompatActivity() {
     var startStopBG = 0
     var startStopFg = 0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityServicesBinding.inflate(layoutInflater)
@@ -27,11 +29,12 @@ class Services : AppCompatActivity() {
 
 
     //    Main controller for this UI
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun mainController() {
 
+        requestPermission()
         initView()
         listeners()
-        requestPermission()
 
     }
 
@@ -41,7 +44,7 @@ class Services : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU){
 
-            ActivityCompat.requestPermissions(this,arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
+            ActivityCompat.requestPermissions(this,arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 0)
 
         }
 
@@ -49,6 +52,7 @@ class Services : AppCompatActivity() {
 
 
     //    Listeners logic
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun listeners() {
 
         binding.apply {
@@ -61,6 +65,7 @@ class Services : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun onBtnFgListener() {
 
         startStopFg++
@@ -72,9 +77,10 @@ class Services : AppCompatActivity() {
                 Intent(applicationContext,ForegroundServices::class.java).also {
 
                     it.action=ForegroundServices.Actions.START.toString()
-                    startService(it)
+                    startForegroundService(it)
 
                 }
+                Toast.makeText(this, "1 is working", Toast.LENGTH_SHORT).show()
 
             }
             2->{
