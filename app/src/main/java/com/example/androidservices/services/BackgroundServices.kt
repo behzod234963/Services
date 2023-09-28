@@ -5,7 +5,7 @@ import android.media.MediaPlayer
 import android.os.IBinder
 import android.provider.Settings
 
-class MyService:android.app.Service() {
+class BackgroundServices:android.app.Service() {
 
     private lateinit var player:MediaPlayer
 
@@ -24,9 +24,7 @@ class MyService:android.app.Service() {
         player.stop()
     }
 
-    override fun onBind(intent: Intent?): IBinder? {
-        TODO("Not yet implemented")
-    }
+    override fun onBind(intent: Intent?): IBinder?=null
 
 
 }

@@ -3,10 +3,8 @@ package com.example.androidservices.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import com.example.androidservices.R
 import com.example.androidservices.databinding.ActivityMainBinding
-import com.example.androidservices.services.MyService
+import com.example.androidservices.services.BackgroundServices
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,6 +25,11 @@ class MainActivity : AppCompatActivity() {
 
             btnStart.setOnClickListener { onBtnStartListener() }
             btnStop.setOnClickListener { onBtnStopListener() }
+            btnNext.setOnClickListener {
+
+                startActivity(Intent(this@MainActivity,Services::class.java))
+
+            }
 
         }
 
@@ -36,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     //    Stop Service type(Started Service)
     private fun onBtnStopListener() {
 
-        stopService(Intent(this@MainActivity, MyService::class.java))
+        stopService(Intent(this@MainActivity, BackgroundServices::class.java))
 
 
     }
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     //    Starting Service type(Started Service)
     private fun onBtnStartListener() {
 
-        startService(Intent(this@MainActivity, MyService::class.java))
+        startService(Intent(this@MainActivity, BackgroundServices::class.java))
 
     }
 }
