@@ -23,15 +23,22 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
 
-            btnStart.setOnClickListener { onBtnStartListener() }
-            btnStop.setOnClickListener { onBtnStopListener() }
-            btnNext.setOnClickListener {
-
-                startActivity(Intent(this@MainActivity,Services::class.java))
-
-            }
+            btnServices.setOnClickListener { openServices() }
+            btnBrRec.setOnClickListener { openBrReceivers() }
 
         }
+
+    }
+
+    private fun openBrReceivers() {
+
+        startActivity(Intent(this,BroadcastReceiver::class.java))
+
+    }
+
+    private fun openServices() {
+
+        startActivity(Intent(this@MainActivity,Services::class.java))
 
     }
 
