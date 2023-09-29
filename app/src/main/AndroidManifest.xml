@@ -17,6 +17,9 @@
         android:theme="@style/Theme.AndroidServices"
         tools:targetApi="31">
         <activity
+            android:name=".ui.ContentProviders"
+            android:exported="false" />
+        <activity
             android:name=".ui.BroadcastReceiver"
             android:exported="false" />
         <activity

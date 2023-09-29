@@ -25,8 +25,15 @@ class MainActivity : AppCompatActivity() {
 
             btnServices.setOnClickListener { openServices() }
             btnBrRec.setOnClickListener { openBrReceivers() }
+            btnContenPro.setOnClickListener { openContentPro() }
 
         }
+
+    }
+
+    private fun openContentPro() {
+
+        startActivity(Intent(this,ContentProviders::class.java))
 
     }
 
