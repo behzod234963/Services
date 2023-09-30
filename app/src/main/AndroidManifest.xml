@@ -17,13 +17,13 @@
         android:theme="@style/Theme.AndroidServices"
         tools:targetApi="31">
         <activity
-            android:name=".ui.ContentProviders"
+            android:name=".ui.ContentProvidersActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.BroadcastReceiver"
+            android:name=".ui.BroadcastReceiverActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.Services"
+            android:name=".ui.ServicesActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"

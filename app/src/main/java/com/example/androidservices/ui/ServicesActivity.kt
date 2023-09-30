@@ -1,25 +1,48 @@
 package com.example.androidservices.ui
 
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.IBinder
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.example.androidservices.databinding.ActivityServicesBinding
 import com.example.androidservices.services.BackgroundServices
+import com.example.androidservices.services.BoundServices
 import com.example.androidservices.services.ForegroundServices
 
-class Services : AppCompatActivity() {
+class ServicesActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityServicesBinding
     var startStopBG = 0
     var startStopFg = 0
+    var startStopBound=0
+
+    val connections=object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+
+            val binder = service as BoundServices.MyBinder
+            val boundService = binder.getService()
+
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+
+        }
+
+
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val intent=Intent(this,BoundServices::class.java)
+        bindService(intent,connections,Context.BIND_AUTO_CREATE)
         binding = ActivityServicesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -65,18 +88,15 @@ class Services : AppCompatActivity() {
 
             btnForeground.setOnClickListener { onBtnFgListener() }
 
-            btnBound.setOnClickListener { onBtnBoundListener() }
+            btnBound.setOnClickListener {  }
 
         }
 
     }
 
-
-//    Listener for button Bound
-    private fun onBtnBoundListener() {
-
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        unbindService(connections)
     }
 
 
@@ -126,13 +146,13 @@ class Services : AppCompatActivity() {
 
             1 -> {
 
-                startService(Intent(this@Services, BackgroundServices::class.java))
+                startService(Intent(this@ServicesActivity, BackgroundServices::class.java))
 
             }
 
             2 -> {
 
-                stopService(Intent(this@Services, BackgroundServices::class.java))
+                stopService(Intent(this@ServicesActivity, BackgroundServices::class.java))
                 startStopBG = 0
 
             }
@@ -147,4 +167,5 @@ class Services : AppCompatActivity() {
 
 
     }
+
 }

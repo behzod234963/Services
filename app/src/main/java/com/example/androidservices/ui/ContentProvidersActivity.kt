@@ -4,18 +4,13 @@ import android.content.ContentUris
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.CalendarContract
 import android.provider.MediaStore
-import androidx.lifecycle.ViewModel
-import com.example.androidservices.R
 import com.example.androidservices.databinding.ActivityContentProvidersBinding
-import com.example.androidservices.viewModel.ImageViewModel
 import java.util.Calendar
 
-class ContentProviders : AppCompatActivity() {
+class ContentProvidersActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityContentProvidersBinding
-    private val viewModel by ViewModel<ImageViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -5,10 +5,9 @@ import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.androidservices.BroadcastReceiver.AirPlaneModeReceiver
-import com.example.androidservices.R
 import com.example.androidservices.databinding.ActivityBroadcastReceiverBinding
 
-class BroadcastReceiver : AppCompatActivity() {
+class BroadcastReceiverActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityBroadcastReceiverBinding
     private val airPlaneModeReceiver=AirPlaneModeReceiver()

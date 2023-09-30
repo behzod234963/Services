@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.androidservices.databinding.ActivityMainBinding
-import com.example.androidservices.services.BackgroundServices
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,36 +32,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun openContentPro() {
 
-        startActivity(Intent(this,ContentProviders::class.java))
+        startActivity(Intent(this,ContentProvidersActivity::class.java))
 
     }
 
     private fun openBrReceivers() {
 
-        startActivity(Intent(this,BroadcastReceiver::class.java))
+        startActivity(Intent(this,BroadcastReceiverActivity::class.java))
 
     }
 
     private fun openServices() {
 
-        startActivity(Intent(this@MainActivity,Services::class.java))
+        startActivity(Intent(this@MainActivity,ServicesActivity::class.java))
 
     }
 
-
-    //    Stop Service type(Started Service)
-    private fun onBtnStopListener() {
-
-        stopService(Intent(this@MainActivity, BackgroundServices::class.java))
-
-
-    }
-
-
-    //    Starting Service type(Started Service)
-    private fun onBtnStartListener() {
-
-        startService(Intent(this@MainActivity, BackgroundServices::class.java))
-
-    }
 }

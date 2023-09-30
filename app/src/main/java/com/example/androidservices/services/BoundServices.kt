@@ -7,46 +7,26 @@ import android.os.IBinder
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.example.androidservices.R
+import java.util.Calendar
 
 class BoundServices: Service() {
-
-    inner class UploadBinder: Binder(){
-
-        fun subscribeToProgress(onProgress:(Int)->Unit){
-
-
-
-        }
-
-    }
-    override fun onBind(intent: Intent?): IBinder?=UploadBinder()
+    private val binder: IBinder = MyBinder()
+    override fun onBind(intent: Intent?): IBinder = MyBinder()
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
-        when(intent?.action){
-
-            Actions.START.toString()->{ startBound() }
-            Actions.STOP.toString()->{ stopSelf() }
-
-        }
+        val notification=NotificationCompat.Builder(this
+        ,"channel")
+            .setSmallIcon(R.drawable.android_kalla)
+            .setContentTitle("hello i am a title")
+            .setContentText("helllo i am a text")
+            .build()
 
         return super.onStartCommand(intent, flags, startId)
     }
 
-    private fun startBound(){
-        val notification= NotificationCompat.Builder(this,"bound_channel")
-            .setSmallIcon(R.drawable.android_kalla)
-            .setContentTitle("Bound title")
-            .setContentText("Bound text")
-            .build()
-        startForeground(1,notification)
-        Toast.makeText(this, "start function is working", Toast.LENGTH_SHORT).show()
-
-    }
-
-    enum class Actions{
-
-        START,STOP
+    class MyBinder : Binder() {
+        fun getService(): BoundServices = BoundServices()
 
     }
 }
